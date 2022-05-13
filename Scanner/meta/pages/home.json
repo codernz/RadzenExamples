@@ -1,0 +1,39 @@
+{
+  "access": [],
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Home",
+          "type": "heading"
+        },
+        {
+          "content": "<BlazorBarcodeScanner.ZXing.JS.BarcodeReader @ref=\"_reader\"\n    Title=\"Scan Barcode from Camera\"\n    StartCameraAutomatically=\"true\"\n    ShowStart=\"true\"\n    ShowReset=\"true\"\n    ShowToggleTorch = \"true\"\n    ShowVideoDeviceList=\"true\"\n    VideoWidth=\"400\"\n    VideoHeight=\"400\"\n    OnBarcodeReceived=\"LocalReceivedBarcodeText\"\n />",
+          "name": "html0",
+          "type": "html"
+        },
+        {
+          "name": "label0",
+          "text": "${Code}",
+          "type": "label"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "Code",
+        "type": "set",
+        "value": "\"\"",
+        "valueType": "string"
+      }
+    ]
+  },
+  "layout": "NoMenu",
+  "name": "Home"
+}

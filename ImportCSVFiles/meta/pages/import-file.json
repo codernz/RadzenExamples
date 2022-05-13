@@ -1,0 +1,172 @@
+{
+  "access": "Everybody",
+  "components": [
+    {
+      "components": [
+        {
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "ImportFile",
+          "type": "heading"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-4",
+              "components": [
+                {
+                  "accept": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet/*,.csv,.xlsx",
+                  "events": {
+                    "complete": [
+                      {
+                        "code": "${fieldNames} = (System.Text.Json.JsonSerializer.Deserialize<string[]>(${event}.JsonResponse.RootElement.GetProperty(\"fieldNames\").GetRawText())).ToList<string>();\n${ImportFields} = (System.Text.Json.JsonSerializer.Deserialize<Models.Mappings[]>(${event}.JsonResponse.RootElement.GetProperty(\"map\").GetRawText(), new System.Text.Json.JsonSerializerOptions\n          {\n              PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase\n          })).ToList<Models.Mappings>();\n          \n${csvFile} = (System.Text.Json.JsonSerializer.Deserialize<string[]>(${event}.JsonResponse.RootElement.GetProperty(\"csvFile\").GetRawText()));          \n\n${BeforeFileisImported}=false;\n",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "name": "upload0",
+                  "type": "upload",
+                  "url": "upload/single",
+                  "visible": "${BeforeFileisImported}"
+                },
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "code": "getDatabaseFields(',');",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "button0",
+                  "text": "Import",
+                  "type": "button",
+                  "visible": "${!BeforeFileisImported}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            },
+            {
+              "class": "col-md-4",
+              "components": [
+                {
+                  "events": {
+                    "click": [
+                      {
+                        "code": "ClearFields();",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "button1",
+                  "style": {
+                    "verticalAlign": "middle"
+                  },
+                  "text": "Cancel",
+                  "type": "button",
+                  "visible": "${!BeforeFileisImported}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "data": "${ImportFields}",
+                  "itemType": "ImportCsvFiles.Models.Mappings",
+                  "name": "datalist0",
+                  "template": [
+                    {
+                      "components": [
+                        {
+                          "class": "col-md-6",
+                          "components": [
+                            {
+                              "data": "${fieldNames}",
+                              "name": "dropdown0",
+                              "template": "",
+                              "textProperty": "Name",
+                              "type": "dropdown",
+                              "value": "${data.DatabaseField}",
+                              "valueProperty": "Name",
+                              "valueType": "string"
+                            }
+                          ],
+                          "name": "col3",
+                          "type": "col"
+                        },
+                        {
+                          "class": "col-md-6",
+                          "components": [
+                            {
+                              "name": "label0",
+                              "text": "${data.CSVField}",
+                              "type": "label"
+                            }
+                          ],
+                          "name": "col2",
+                          "type": "col"
+                        }
+                      ],
+                      "name": "row2",
+                      "type": "row"
+                    }
+                  ],
+                  "type": "datalist"
+                }
+              ],
+              "name": "col4",
+              "type": "col"
+            }
+          ],
+          "name": "row1",
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "fieldNames",
+        "type": "set",
+        "value": "new List<string>()",
+        "valueType": "List<string>"
+      },
+      {
+        "global": false,
+        "name": "ImportFields",
+        "type": "set",
+        "value": "new List<ImportCsvFiles.Models.Mappings>().AsEnumerable() ",
+        "valueType": "IEnumerable<ImportCsvFiles.Models.Mappings>"
+      },
+      {
+        "name": "csvFile",
+        "type": "set",
+        "value": "new string[0]",
+        "valueType": "string[]"
+      },
+      {
+        "name": "BeforeFileisImported",
+        "type": "set",
+        "value": "true",
+        "valueType": "bool"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "ImportFile"
+}

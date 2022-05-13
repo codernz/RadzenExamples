@@ -1,0 +1,28 @@
+{
+  "dataSources": [
+    "CSVImportExample"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "ImportCSVFiles",
+  "navigation": [
+    "Customer",
+    "ImportFile"
+  ],
+  "pages": [
+    "Customer",
+    "Add Customer",
+    "Edit Customer",
+    "ImportFile"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": "ImportFile",
+  "theme": "default"
+}

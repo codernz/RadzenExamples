@@ -1,0 +1,39 @@
+{
+  "cssFiles": [],
+  "dataSources": [],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "ignore": [
+    ""
+  ],
+  "javaScriptFiles": [
+    {
+      "value": "_content/BlazorBarcodeScanner.ZXing.JS/zxingjs.index.min.js"
+    },
+    {
+      "value": "_content/BlazorBarcodeScanner.ZXing.JS/BlazorBarcodeScanner.js"
+    }
+  ],
+  "layouts": [
+    "Login",
+    "Main",
+    "NoMenu"
+  ],
+  "logo": "",
+  "name": "Scanner",
+  "namespaces": [],
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "port": 8000,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "5",
+  "startPage": "Home",
+  "theme": "default",
+  "title": "Scanner"
+}

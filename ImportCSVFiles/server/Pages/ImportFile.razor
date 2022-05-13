@@ -1,0 +1,44 @@
+﻿@page "/"
+@page "/import-file"
+@layout MainLayout
+@inherits ImportCsvFiles.Pages.ImportFileComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using ImportCsvFiles.Models.CsvImportExample
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="ImportFile">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-4">
+        <RadzenUpload Accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet/*,.csv,.xlsx" Url="upload/single" Visible="@BeforeFileisImported" Complete="@Upload0Complete">
+        </RadzenUpload>
+        <RadzenButton Text="Import" Visible="@(!BeforeFileisImported)" Click="@Button0Click">
+        </RadzenButton>
+      </div>
+      <div class="col-md-4">
+        <RadzenButton style="vertical-align: middle" Text="Cancel" Visible="@(!BeforeFileisImported)" Click="@Button1Click">
+        </RadzenButton>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenDataList @ref="datalist0" Data="@ImportFields" TItem="ImportCsvFiles.Models.Mappings">
+          <Template Context="importCsvFilesModelsMappings">
+            <div class="row">
+              <div class="col-md-6">
+                <RadzenDropDown Data="@fieldNames" TextProperty="Name" @bind-Value="@(importCsvFilesModelsMappings.DatabaseField)" ValueProperty="Name" Name="Dropdown0">
+                </RadzenDropDown>
+              </div>
+              <div class="col-md-6">
+                <RadzenLabel Text="@($"{(importCsvFilesModelsMappings.CSVField)}")">
+                </RadzenLabel>
+              </div>
+            </div>
+          </Template>
+        </RadzenDataList>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

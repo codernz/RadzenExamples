@@ -1,0 +1,55 @@
+﻿@page "/customer"
+@layout MainLayout
+@inherits ImportCsvFiles.Pages.CustomerComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using ImportCsvFiles.Models.CsvImportExample
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Customer">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getCustomersResult" TItem="ImportCsvFiles.Models.CsvImportExample.Customer" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="CustomerID" Title="Customer ID">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="Gender" Title="Gender">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="Title" Title="Title">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="GivenName" Title="Given Name">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="MiddleInitial" Title="Middle Initial">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="Surname" Title="Surname">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="StreetAddress" Title="Street Address">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="City" Title="City">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="ZipCode" Title="Zip Code">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="Country" Title="Country">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="EmailAddress" Title="Email Address">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="Age" Title="Age">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Property="Company" Title="Company">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="ImportCsvFiles.Models.CsvImportExample.Customer" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="importCsvFilesModelsCsvImportExampleCustomer">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, importCsvFilesModelsCsvImportExampleCustomer))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,28 @@
+﻿@page "/"
+@page "/home"
+@layout NoMenuLayout
+@inherits Scanner.Pages.HomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Home">
+    </RadzenHeading>
+    <RadzenHtml>
+      <BlazorBarcodeScanner.ZXing.JS.BarcodeReader @ref="_reader"
+          Title="Scan Barcode from Camera"
+          StartCameraAutomatically="true"
+          ShowStart="true"
+          ShowReset="true"
+          ShowToggleTorch = "true"
+          ShowVideoDeviceList="true"
+          VideoWidth="400"
+          VideoHeight="400"
+          OnBarcodeReceived="LocalReceivedBarcodeText"
+       />
+    </RadzenHtml>
+    <RadzenLabel Text="@($"{Code}")">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenContent>

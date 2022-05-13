@@ -1,0 +1,518 @@
+{
+  "info": {
+    "title": "CSVImportExample",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15
+  },
+  "definitions": {
+    "Customer": {
+      "x-table": "dbo.Customers",
+      "resource": "Customers",
+      "required": [
+        "GivenName",
+        "Surname",
+        "City",
+        "Age"
+      ],
+      "properties": {
+        "CustomerID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Gender": {
+          "type": "string",
+          "length": 50
+        },
+        "Title": {
+          "type": "string",
+          "length": 50
+        },
+        "GivenName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "MiddleInitial": {
+          "type": "string",
+          "length": 50
+        },
+        "Surname": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 60
+        },
+        "StreetAddress": {
+          "type": "string",
+          "length": 50
+        },
+        "City": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "ZipCode": {
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Country": {
+          "type": "string",
+          "length": 50
+        },
+        "EmailAddress": {
+          "type": "string",
+          "length": 50
+        },
+        "Age": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Company": {
+          "type": "string",
+          "length": 50
+        }
+      }
+    },
+    "CustomersStaging": {
+      "x-table": "dbo.Customers_Staging",
+      "resource": "CustomersStagings",
+      "required": [],
+      "properties": {
+        "Customer_StagingID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Title": {
+          "type": "string",
+          "length": 50
+        },
+        "GivenName": {
+          "type": "string",
+          "length": 50
+        },
+        "MiddleInitial": {
+          "type": "string",
+          "length": 50
+        },
+        "Surname": {
+          "type": "string",
+          "length": 60
+        },
+        "StreetAddress": {
+          "type": "string",
+          "length": 50
+        },
+        "City": {
+          "type": "string",
+          "length": 50
+        },
+        "ZipCode": {
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Country": {
+          "type": "string",
+          "length": 50
+        },
+        "Gender": {
+          "type": "string",
+          "length": 50
+        },
+        "EmailAddress": {
+          "type": "string",
+          "length": 50
+        },
+        "Age": {
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Company": {
+          "type": "string",
+          "length": 50
+        }
+      }
+    },
+    "UspCustomerUpdate": {
+      "x-view": "sp",
+      "x-table": "dbo.usp_CustomerUpdate",
+      "resource": "UspCustomerUpdates",
+      "properties": {}
+    }
+  },
+  "paths": {
+    "/Customers": {
+      "get": {
+        "operationId": "getCustomers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Customer"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomer",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Customer",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomersStagings": {
+      "get": {
+        "operationId": "getCustomersStagings",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/CustomersStaging"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createCustomersStaging",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CustomersStaging",
+            "schema": {
+              "$ref": "#/definitions/CustomersStaging"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/CustomersStaging"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/UspCustomerUpdatesFunc()": {
+      "get": {
+        "operationId": "UspCustomerUpdates",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/UspCustomerUpdate"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Customers({CustomerID})": {
+      "delete": {
+        "operationId": "deleteCustomer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCustomerByCustomerID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomer",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "CustomerID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Customer",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCustomerChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Customer",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/CustomersStagings({Customer_StagingID})": {
+      "delete": {
+        "operationId": "deleteCustomersStaging",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Customer_StagingID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCustomersStagingByCustomer_StagingID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Customer_StagingID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CustomersStaging"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateCustomersStaging",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Customer_StagingID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "CustomersStaging",
+            "schema": {
+              "$ref": "#/definitions/CustomersStaging"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "cancel": {
+        "operationId": "cancelCustomersStagingChanges",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CustomersStaging",
+            "schema": {
+              "$ref": "#/definitions/CustomersStaging"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/CSVImportExample",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}
