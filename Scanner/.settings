@@ -1,1 +1,0 @@
-{"deploy":{"provider":"azure","server":"https://QrScannerBlazor.scm.azurewebsites.net/api/zipdeploy","user":"$QrScannerBlazor","password":"eFzESDyGqbbPAAhSX0itqJ5isMWykmgSDzuMLzgDj5FqFbGRboE4rCtkTTYs","siteName":"QrScannerBlazor","connectionStrings":{},"endPoints":{},"method":"computerName","removeAdditional":true}}
