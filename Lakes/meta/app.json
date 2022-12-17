@@ -1,0 +1,37 @@
+{
+  "cssFiles": [],
+  "dataSources": [
+    "LakeData"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "ignore": [
+    ""
+  ],
+  "javaScriptFiles": [
+    {
+      "value": "~/js/maps.js"
+    }
+  ],
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "Lakes",
+  "namespaces": [],
+  "navigation": [
+    "Home"
+  ],
+  "pages": [
+    "Home"
+  ],
+  "port": 8000,
+  "serverLang": "cs",
+  "serverPort": 5000,
+  "serverProject": true,
+  "serverVersion": "7",
+  "startPage": "Home",
+  "theme": "standard",
+  "title": "Lakes"
+}

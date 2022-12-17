@@ -1,0 +1,99 @@
+{
+  "info": {
+    "title": "LakeData",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15,
+    "x-infer-aspnet": false,
+    "x-infer-tables": true,
+    "x-infer-relations": true,
+    "x-infer-views": true,
+    "x-infer-sps": true
+  },
+  "definitions": {
+    "VwPlace": {
+      "x-view": true,
+      "x-table": "dbo.vw_Places",
+      "resource": "VwPlaces",
+      "required": [
+        "PlaceName"
+      ],
+      "properties": {
+        "Area": {
+          "type": "string"
+        },
+        "PlaceName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 20,
+          "x-key": true,
+          "x-virtual": true
+        }
+      }
+    }
+  },
+  "paths": {
+    "/VwPlaces": {
+      "get": {
+        "operationId": "getVwPlaces",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/VwPlace"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/LakeData",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

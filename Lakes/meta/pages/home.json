@@ -1,0 +1,70 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-12",
+              "components": [
+                {
+                  "apiKey": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                  "attributes": [
+                    {
+                      "name": "@ref",
+                      "value": "map"
+                    }
+                  ],
+                  "center": {
+                    "lat": -37.73,
+                    "lng": 175.22
+                  },
+                  "data": "",
+                  "name": "googlemap0",
+                  "style": {
+                    "height": "800px",
+                    "width": "100%"
+                  },
+                  "type": "googlemap",
+                  "zoom": 5
+                }
+              ],
+              "name": "col0",
+              "style": {
+                "height": "100%"
+              },
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {
+            "height": "100%",
+            "width": "100%"
+          },
+          "type": "row"
+        }
+      ],
+      "container": "main",
+      "type": "content"
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "LakeData.getVwPlaces",
+        "parameters": [],
+        "then": [
+          {
+            "name": "LakeResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<Lakes.Models.LakeData.VwPlace>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "layout": "Main",
+  "name": "Home"
+}

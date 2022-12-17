@@ -1,0 +1,19 @@
+﻿@page "/"
+@page "/home"
+@layout MainLayout
+@inherits Lakes.Pages.HomeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Lakes.Models.LakeData
+<PageTitle>Home</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div style="height: 100%; width: 100%" class="row">
+      <div class="col-md-12" style="height: 100%">
+        <RadzenGoogleMap ApiKey="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" Center="@(new GoogleMapPosition() { Lat = -37.73, Lng = 175.22 })" style="height: 800px; width: 100%" Zoom="5" @ref="map">
+        </RadzenGoogleMap>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
